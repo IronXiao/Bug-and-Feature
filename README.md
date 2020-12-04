@@ -8,9 +8,9 @@
 
 ##### Issue report should be like this:
 
-###### *Title*: [platform-androidVersion]-ssueTitle
+###### *Title*: [platform-androidVersion]issueTitle
 
-​	eg: [RTD1295 AN9]-TV box not reboot after power key pressed on IR remote
+​	eg: [RTD1295 AN9]TV box not reboot after power key pressed on IR remote
 
 ###### Details:
 
