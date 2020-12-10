@@ -1,0 +1,16 @@
+ common/drivers/amlogic/usb/phy/phy-aml-new-usb3-v2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/drivers/amlogic/usb/phy/phy-aml-new-usb3-v2.c b/common/drivers/amlogic/usb/phy/phy-aml-new-usb3-v2.c
+index 3c97500bb8..843f957ad0 100644
+--- a/common/drivers/amlogic/usb/phy/phy-aml-new-usb3-v2.c
++++ b/common/drivers/amlogic/usb/phy/phy-aml-new-usb3-v2.c
+@@ -719,7 +719,7 @@ static int amlogic_new_usb3_v2_probe(struct platform_device *pdev)
+ 			return ret;
+ 		}
+ 
+-		phy->phy.flags = AML_USB3_PHY_ENABLE;
++//		phy->phy.flags = AML_USB3_PHY_ENABLE;
+ 	}
+ 
+ 	INIT_DELAYED_WORK(&phy->work, amlogic_gxl_work);
