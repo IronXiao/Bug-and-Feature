@@ -1,0 +1,46 @@
+ system/core/rootdir/init.environ.rc.in | 1 +
+ system/core/rootdir/init.rc            | 2 +-
+ system/extras/su/su.cpp                | 2 ++
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/system/core/rootdir/init.environ.rc.in b/system/core/rootdir/init.environ.rc.in
+index 2e2ab74653..59c3eb1f64 100644
+--- a/system/core/rootdir/init.environ.rc.in
++++ b/system/core/rootdir/init.environ.rc.in
+@@ -7,6 +7,7 @@ on init
+     export ANDROID_STORAGE /storage
+     export EXTERNAL_STORAGE /sdcard
+     export ASEC_MOUNTPOINT /mnt/asec
++    export HOST_NAME shell
+     export BOOTCLASSPATH %BOOTCLASSPATH%
+     export SYSTEMSERVERCLASSPATH %SYSTEMSERVERCLASSPATH%
+     %EXPORT_GLOBAL_ASAN_OPTIONS%
+diff --git a/system/core/rootdir/init.rc b/system/core/rootdir/init.rc
+index ceb157aa77..5b0b093978 100755
+--- a/system/core/rootdir/init.rc
++++ b/system/core/rootdir/init.rc
+@@ -753,7 +753,7 @@ service console /system/bin/sh
+     console
+     group shell log readproc root
+     seclabel u:r:shell:s0
+-    setenv HOSTNAME console
++#    setenv HOSTNAME console
+ 
+ on property:ro.debuggable=1
+     # Give writes to anyone for the trace folder on debug builds.
+diff --git a/system/extras/su/su.cpp b/system/extras/su/su.cpp
+index f3e4ff03fa..7fa5ab68ee 100644
+--- a/system/extras/su/su.cpp
++++ b/system/extras/su/su.cpp
+@@ -124,9 +124,11 @@ int main(int argc, char** argv) {
+     if (pw) {
+         setenv("LOGNAME", pw->pw_name, 1);
+         setenv("USER", pw->pw_name, 1);
++        setenv("HOSTNAME", "root", 1);
+     } else {
+         unsetenv("LOGNAME");
+         unsetenv("USER");
++        setenv("HOSTNAME", "shell", 1);
+     }
+ 
+     // Set up the arguments for exec.
